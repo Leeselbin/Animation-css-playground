@@ -1,4 +1,4 @@
 {
-  "/carousel/page": "app/carousel/page.js",
-  "/page": "app/page.js"
+  "/page": "app/page.js",
+  "/carousel/page": "app/carousel/page.js"
 }
