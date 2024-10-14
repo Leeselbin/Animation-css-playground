@@ -38,3 +38,6 @@ Thumbs.db
 
 # Typescript
 *.tsbuildinfo
+
+# Ignore index.pack.gz files
+*.pack.gz
