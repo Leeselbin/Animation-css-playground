@@ -7,10 +7,13 @@ const Container = styled.div`
     margin: 0 auto;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center;
 `;
 
 const Title = styled.p`
     margin-bottom: 20px;
+    margin-top: 20px;
     font-size: 24px;
     text-align: center;
 `;
@@ -18,18 +21,25 @@ const Title = styled.p`
 const CarouselWrapper = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
     position: relative;
     width: 600px;
     height: 300px;
-    margin: 0 auto;
     overflow: hidden;
 `;
 
-const Image = styled.img`
-    width: 100%;
+interface CarouselTrackProps {
+    currentIndex: number;
+}
+
+const CarouselTrack = styled.div<CarouselTrackProps>`
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+    transform: ${({ currentIndex }) => `translateX(-${currentIndex * 600}px)`};
+`;
+
+const Slide = styled.img`
+    min-width: 600px;
     height: auto;
-    transition: opacity 0.5s ease;
 `;
 
 const Button = styled.button`
@@ -53,33 +63,37 @@ const NextButton = styled(Button)`
     right: 10px;
 `;
 
-const NormalCarousel = () => {
-    const images = [
+const SlidingCarousel: React.FC = () => {
+    const images: string[] = [
         'https://via.placeholder.com/600x400/FF5733/FFFFFF?text=Slide+1',
         'https://via.placeholder.com/600x400/33FF57/FFFFFF?text=Slide+2',
         'https://via.placeholder.com/600x400/3357FF/FFFFFF?text=Slide+3',
     ];
 
-    const [currentIndex, setCurrentIndex] = useState(0);
+    const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-    const nextSlide = () => {
+    const nextSlide = (): void => {
         setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
     };
 
-    const prevSlide = () => {
+    const prevSlide = (): void => {
         setCurrentIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
     };
 
     return (
         <Container>
-            <Title>Normal Carousel</Title>
+            <Title>Sliding Carousel</Title>
             <CarouselWrapper>
+                <CarouselTrack currentIndex={currentIndex}>
+                    {images.map((image, index) => (
+                        <Slide key={index} src={image} alt={`Slide ${index + 1}`} />
+                    ))}
+                </CarouselTrack>
                 <PrevButton onClick={prevSlide}>&#10094;</PrevButton>
-                <Image src={images[currentIndex]} alt={`Slide ${currentIndex + 1}`} />
                 <NextButton onClick={nextSlide}>&#10095;</NextButton>
             </CarouselWrapper>
         </Container>
     );
 };
 
-export default NormalCarousel;
+export default SlidingCarousel;
