@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-// 날짜 관련 유틸 함수
 const getDaysInMonth = (year: number, month: number) => {
     const date = new Date(year, month, 1);
     const days = [];
@@ -15,7 +14,7 @@ const getDaysInMonth = (year: number, month: number) => {
 
 const Calendar: React.FC = () => {
     const today = new Date();
-    const [selectedDate, setSelectedDate] = useState<Date>(today); // 선택된 날짜를 오늘 날짜로 초기화
+    const [selectedDate, setSelectedDate] = useState<Date>(today);
     const [currentMonth, setCurrentMonth] = useState<number>(today.getMonth());
     const [currentYear, setCurrentYear] = useState<number>(today.getFullYear());
 
