@@ -16,9 +16,9 @@ export default function Navigation() {
                 <li>
                     <Link href={'/carousel'}>Carousel{path === '/carousel' ? '🔥' : ''}</Link>
                 </li>
-                {/* <li>
-                    <Link href={'/carousel'}>Carousel{path === '/carousel' ? '🔥' : ''}</Link>
-                </li> */}
+                <li>
+                    <Link href={'/calendar'}>Calendar{path === '/calendar' ? '🔥' : ''}</Link>
+                </li>
             </ul>
         </nav>
     );
