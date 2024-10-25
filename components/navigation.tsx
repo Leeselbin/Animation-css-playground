@@ -11,7 +11,7 @@ export default function Navigation() {
         <nav className={styles.nav}>
             <ul className={styles.list}>
                 <li>
-                    <Link href={'/'}>Home{path === '/' ? '🔥' : ''}</Link>
+                    <Link href={'/button'}>Button{path === '/button' ? '🔥' : ''}</Link>
                 </li>
                 <li>
                     <Link href={'/carousel'}>Carousel{path === '/carousel' ? '🔥' : ''}</Link>
