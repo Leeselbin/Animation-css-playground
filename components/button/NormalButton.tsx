@@ -14,29 +14,51 @@ const Button = styled.button`
     width: 150px;
     height: 80px;
     border-radius: 20px;
-    background-color: skyblue;
-    margin-top: 10px;
     border: none;
-    font-size: 18px;
-
+    cursor: pointer;
     transition: transform 0.1s ease;
+    margin-bottom: 30px;
+    margin-top: 10px;
 
     &:hover {
-        background-color: lightblue;
+        opacity: 0.9;
     }
 
     &:active {
-        transform: scale(0.95); /* 버튼을 살짝 눌린 효과 */
+        transform: scale(0.95);
     }
 `;
 
+const PrimaryButton = styled(Button)`
+    background-color: skyblue;
+    color: white;
+`;
+
+const OutlineButton = styled(Button)`
+    background-color: transparent;
+    border: 2px solid skyblue;
+    color: skyblue;
+`;
+
+const TextButton = styled(Button)`
+    background-color: transparent;
+    color: skyblue;
+    width: auto;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+`;
 const NormalButton = () => {
     return (
         <ButtonWrap>
-            <p>NormalButton</p>
-            <Button>
-                <p>Click</p>
-            </Button>
+            <p>Primary Button</p>
+            <PrimaryButton>Primary</PrimaryButton>
+
+            <p>Outline Button</p>
+            <OutlineButton>Outline</OutlineButton>
+
+            <p>Text Button</p>
+            <TextButton>Text Only</TextButton>
         </ButtonWrap>
     );
 };
