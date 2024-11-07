@@ -1,3 +1,4 @@
+import DarkMode from '../components/darkMode';
 import Navigation from '../components/navigation';
 import '../styles/global.css';
 import { Metadata } from 'next';
@@ -15,6 +16,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <html lang="en">
             <body>
                 <Navigation />
+                <DarkMode />
                 {children}
             </body>
         </html>
