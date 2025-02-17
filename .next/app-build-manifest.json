@@ -1,42 +1,35 @@
 {
   "pages": {
-    "/carousel/page": [
-      "static/chunks/webpack-12b347879f66b4cc.js",
-      "static/chunks/fd9d1056-7d9b70e9456442b8.js",
-      "static/chunks/117-611f4e0a9ffc26e1.js",
-      "static/chunks/main-app-733963be246e790f.js",
-      "static/chunks/771-c734478e0b8024da.js",
-      "static/chunks/app/carousel/page-936698dcaba95a07.js"
+    "/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/page.js"
     ],
     "/layout": [
-      "static/chunks/webpack-12b347879f66b4cc.js",
-      "static/chunks/fd9d1056-7d9b70e9456442b8.js",
-      "static/chunks/117-611f4e0a9ffc26e1.js",
-      "static/chunks/main-app-733963be246e790f.js",
-      "static/css/e4ef08e35585c82f.css",
-      "static/chunks/448-537aaafcfe016514.js",
-      "static/chunks/app/layout-2e552db812a1e58c.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/css/app/layout.css",
+      "static/chunks/app/layout.js"
     ],
     "/not-found": [
-      "static/chunks/webpack-12b347879f66b4cc.js",
-      "static/chunks/fd9d1056-7d9b70e9456442b8.js",
-      "static/chunks/117-611f4e0a9ffc26e1.js",
-      "static/chunks/main-app-733963be246e790f.js",
-      "static/chunks/app/not-found-3c95fdd8704873c1.js"
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/not-found.js"
     ],
-    "/page": [
-      "static/chunks/webpack-12b347879f66b4cc.js",
-      "static/chunks/fd9d1056-7d9b70e9456442b8.js",
-      "static/chunks/117-611f4e0a9ffc26e1.js",
-      "static/chunks/main-app-733963be246e790f.js",
-      "static/chunks/app/page-959f003d2c6a2076.js"
+    "/button/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/button/page.js"
     ],
-    "/_not-found/page": [
-      "static/chunks/webpack-12b347879f66b4cc.js",
-      "static/chunks/fd9d1056-7d9b70e9456442b8.js",
-      "static/chunks/117-611f4e0a9ffc26e1.js",
-      "static/chunks/main-app-733963be246e790f.js",
-      "static/chunks/app/_not-found/page-9732f1d91036c1c2.js"
+    "/carousel/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/carousel/page.js"
+    ],
+    "/calendar/page": [
+      "static/chunks/webpack.js",
+      "static/chunks/main-app.js",
+      "static/chunks/app/calendar/page.js"
     ]
   }
 }

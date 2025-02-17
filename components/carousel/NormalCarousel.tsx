@@ -30,6 +30,7 @@ const Image = styled.img`
     width: 100%;
     height: auto;
     transition: opacity 0.5s ease;
+    
 `;
 
 const Button = styled.button`
