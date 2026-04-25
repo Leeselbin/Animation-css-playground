@@ -19,6 +19,9 @@ export default function Navigation() {
                 <li>
                     <Link href={'/calendar'}>Calendar{path === '/calendar' ? '🔥' : ''}</Link>
                 </li>
+                <li>
+                    <Link href={'/figmaPractice'}>Calendar{path === '/figmaPractice' ? '🔥' : ''}</Link>
+                </li>
             </ul>
         </nav>
     );
