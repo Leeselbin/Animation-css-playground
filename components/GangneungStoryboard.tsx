@@ -154,7 +154,7 @@ const GangneungPremiumTour = () => {
                         border: borderStyle,
                         backgroundColor: isHC ? '#FFFF00' : 'var(--gn-deepblue)',
                         color: isHC ? '#000' : '#FFFFFF',
-                        fontWeight: 900,
+                        fontWeight: 901,
                         fontSize: '14px',
                     }}
                 >
