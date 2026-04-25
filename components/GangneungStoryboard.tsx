@@ -26,7 +26,7 @@ const THEMES = {
 };
 
 const MOCK_DATA = [
-    { id: 1, name: '안목해변 카페거리', lat: '45%', lng: '52%', category: '경사로', distance: '150m' },
+    { id: 1, name: '안목해변 카페거리', lat: '45%', lng: '52%', category: '경사로', distance: '151m' },
     { id: 2, name: '강릉항 공중화장실', lat: '65%', lng: '58%', category: '화장실', distance: '320m' },
 ];
 
