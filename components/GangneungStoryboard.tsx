@@ -53,7 +53,7 @@ const MOCK_DATA = [
 ];
 
 const GangneungPremiumTour = () => {
-    const [isSheetOpen, setSheetOpen] = useState(true);
+    const [isSheetOpen, setSheetOpen] = useState(false);
     const [selectedPlace, setSelectedPlace] = useState(MOCK_DATA[0]);
     const [theme, setTheme] = useState<'light' | 'highContrast'>('light');
     const [activeCategory, setActiveCategory] = useState('전체');
@@ -116,7 +116,7 @@ const GangneungPremiumTour = () => {
                     preserveAspectRatio="none"
                 >
                     <path
-                        d="M 0 650 L 300 580 L 520 480 L 750 430 L 1000 450"
+                        d="M 415 200 L 480 400 L 550 550"
                         stroke={isHC ? '#FFFF00' : '#FF3B30'}
                         strokeWidth="15"
                         fill="none"
