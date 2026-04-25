@@ -2,6 +2,9 @@
 
 import React, { useState } from 'react';
 
+/**
+ * 🎨 테마 및 디자인 시스템
+ */
 const THEMES = {
     light: {
         '--gn-deepblue': '#003366',
@@ -15,7 +18,7 @@ const THEMES = {
     },
     highContrast: {
         '--gn-deepblue': '#000000',
-        '--gn-accent': '#FFFF00', // 고대비 노랑
+        '--gn-accent': '#FFFF00',
         '--gn-success': '#FFFF00',
         '--gn-bg': '#000000',
         '--text-main': '#FFFF00',
@@ -25,21 +28,40 @@ const THEMES = {
     },
 };
 
+/**
+ * 🚌 목업 데이터 (버스 도착 정보 포함)
+ */
 const MOCK_DATA = [
-    { id: 1, name: '안목해변 카페거리', lat: '45%', lng: '52%', category: '경사로', distance: '151m' },
-    { id: 2, name: '강릉항 공중화장실', lat: '65%', lng: '58%', category: '화장실', distance: '320m' },
+    {
+        id: 1,
+        name: '안목해변 카페거리',
+        lat: '48%',
+        lng: '52%',
+        category: '경사로',
+        distance: '151m',
+        busInfo: { line: '302번', type: '저상버스', arrivalTime: '5분 후', status: '여유' },
+    },
+    {
+        id: 2,
+        name: '강릉항 공중화장실',
+        lat: '65%',
+        lng: '58%',
+        category: '화장실',
+        distance: '320m',
+        busInfo: { line: '202-1번', type: '일반버스', arrivalTime: '12분 후', status: '보통' },
+    },
 ];
 
 const GangneungPremiumTour = () => {
-    const [isSheetOpen, setSheetOpen] = useState(false);
+    const [isSheetOpen, setSheetOpen] = useState(true);
     const [selectedPlace, setSelectedPlace] = useState(MOCK_DATA[0]);
-    const [theme, setTheme] = useState<'light' | 'highContrast'>('highContrast');
-    const [activeCategory, setActiveCategory] = useState('경사로');
+    const [theme, setTheme] = useState<'light' | 'highContrast'>('light');
+    const [activeCategory, setActiveCategory] = useState('전체');
 
     const isHC = theme === 'highContrast';
     const currentThemeStyles = THEMES[theme] as React.CSSProperties;
 
-    // 💡 핵심 수정: 고대비 모드(노란 배경)일 때 선택된 글자색을 검정(#000)으로 강제
+    // 고대비 가독성 패치: 배경이 노란색일 때 글자는 검정(#000)
     const selectedTextColor = isHC ? '#000000' : '#FFFFFF';
     const borderStyle = isHC ? '3px solid #FFFF00' : '1px solid rgba(255, 255, 255, 0.3)';
 
@@ -79,7 +101,7 @@ const GangneungPremiumTour = () => {
                 onClick={() => setSheetOpen(false)}
             />
 
-            {/* 2. 🔴 경사로 하이라이트 경로 */}
+            {/* 2. 🔴 내비게이션 경로 (경사로 선택 시) */}
             {activeCategory === '경사로' && (
                 <svg
                     style={{
@@ -90,28 +112,23 @@ const GangneungPremiumTour = () => {
                         zIndex: 1,
                         pointerEvents: 'none',
                     }}
-                    viewBox="0 0 100 100"
+                    viewBox="0 0 1000 1000"
                     preserveAspectRatio="none"
                 >
                     <path
-                        d="M 42 20 L 45 30 L 53 50 L 63 70 "
+                        d="M 0 650 L 300 580 L 520 480 L 750 430 L 1000 450"
                         stroke={isHC ? '#FFFF00' : '#FF3B30'}
-                        strokeWidth="1.2"
+                        strokeWidth="15"
                         fill="none"
                         strokeLinecap="round"
                         style={{
-                            opacity: 0.9,
-                            filter: isHC ? 'drop-shadow(0 0 10px #FFFF00)' : 'drop-shadow(0 0 12px #FF3B30)',
-                            strokeDasharray: '4, 2',
+                            opacity: 0.85,
+                            filter: isHC ? 'none' : 'drop-shadow(0 0 15px rgba(255, 59, 48, 0.6))',
+                            strokeDasharray: '30, 20',
                             animation: 'navDash 2s linear infinite',
                         }}
                     />
-                    <style>{`
-                        @keyframes navDash {
-                            from { stroke-dashoffset: 20; }
-                            to { stroke-dashoffset: 0; }
-                        }
-                    `}</style>
+                    <style>{`@keyframes navDash { from { stroke-dashoffset: 50; } to { stroke-dashoffset: 0; } }`}</style>
                 </svg>
             )}
 
@@ -148,7 +165,6 @@ const GangneungPremiumTour = () => {
                         G-Barrier Free
                     </h2>
                 </div>
-
                 <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
                     <button
                         onClick={() => setTheme(isHC ? 'light' : 'highContrast')}
@@ -174,7 +190,7 @@ const GangneungPremiumTour = () => {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            color: selectedTextColor, // 💡 고대비 시 검정색 적용
+                            color: selectedTextColor,
                             fontWeight: 900,
                         }}
                     >
@@ -211,7 +227,6 @@ const GangneungPremiumTour = () => {
                             padding: '12px 20px',
                             borderRadius: '18px',
                             border: borderStyle,
-                            // 선택된 버튼은 고대비 시 노란색 배경, 일반 모드 시 딥블루 배경
                             backgroundColor:
                                 activeCategory === cat
                                     ? isHC
@@ -220,7 +235,6 @@ const GangneungPremiumTour = () => {
                                     : isHC
                                     ? '#000'
                                     : '#FFF',
-                            // 💡 글자색 핵심: 선택되면 selectedTextColor(블랙/화이트) 적용
                             color: activeCategory === cat ? selectedTextColor : isHC ? '#FFFF00' : 'var(--text-main)',
                             fontWeight: 900,
                             fontSize: '14px',
@@ -233,7 +247,7 @@ const GangneungPremiumTour = () => {
                 ))}
             </div>
 
-            {/* 5. 인터랙티브 마커 리스트 */}
+            {/* 5. 마커 리스트 */}
             {filteredData.map((place) => (
                 <div
                     key={place.id}
@@ -259,7 +273,7 @@ const GangneungPremiumTour = () => {
                     <div
                         style={{
                             backgroundColor: isHC ? '#FFFF00' : 'var(--gn-deepblue)',
-                            color: selectedTextColor, // 💡 마커 내부 글자도 가시성 확보
+                            color: selectedTextColor,
                             border: isHC ? '2px solid #000' : 'none',
                             padding: '10px 18px',
                             borderRadius: '20px',
@@ -269,17 +283,9 @@ const GangneungPremiumTour = () => {
                             whiteSpace: 'nowrap',
                         }}
                     >
-                        {place.name}
+                        {place.name}{' '}
                         {activeCategory === '경사로' && place.category === '경사로' && (
-                            <span
-                                style={{
-                                    marginLeft: '8px',
-                                    color: isHC ? '#000' : '#FF3B30', // 고대비 시 마커 내 불꽃 아이콘도 검정으로
-                                    animation: 'pulse 1s infinite',
-                                }}
-                            >
-                                ●
-                            </span>
+                            <span style={{ marginLeft: '8px', color: isHC ? '#000' : '#FF3B30' }}>●</span>
                         )}
                     </div>
                     <div
@@ -294,8 +300,191 @@ const GangneungPremiumTour = () => {
                 </div>
             ))}
 
-            {/* 6. 바텀 시트 (생략 - 동일) */}
-            {/* ... 기존 바텀 시트 코드 유지 ... */}
+            {/* 6. 바텀 시트 (정보 및 저상버스 정보) */}
+            <div
+                style={{
+                    position: 'absolute',
+                    left: '16px',
+                    right: '16px',
+                    bottom: isSheetOpen ? '24px' : '-100%',
+                    backgroundColor: isHC ? '#000' : '#FFF',
+                    border: borderStyle,
+                    borderRadius: '44px',
+                    padding: '40px 32px',
+                    transition: 'all 0.7s cubic-bezier(0.19, 1, 0.22, 1)',
+                    zIndex: 200,
+                    boxSizing: 'border-box',
+                }}
+            >
+                <div
+                    style={{
+                        width: '50px',
+                        height: '6px',
+                        backgroundColor: isHC ? '#FFFF00' : '#E2E8F0',
+                        borderRadius: '10px',
+                        margin: '0 auto 30px',
+                    }}
+                />
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <div>
+                        <span
+                            style={{
+                                fontSize: '12px',
+                                fontWeight: 900,
+                                color: isHC ? '#000' : '#22C55E',
+                                backgroundColor: isHC ? '#FFFF00' : '#F0FFF4',
+                                border: isHC ? '1px solid #000' : 'none',
+                                padding: '7px 14px',
+                                borderRadius: '12px',
+                                display: 'inline-block',
+                                marginBottom: '16px',
+                            }}
+                        >
+                            ✓ 무장애 {selectedPlace.category} 안내 중
+                        </span>
+                        <h3 style={{ margin: 0, fontSize: '32px', fontWeight: 900, color: 'var(--text-main)' }}>
+                            {selectedPlace.name}
+                        </h3>
+                    </div>
+                    <div
+                        style={{
+                            textAlign: 'right',
+                            backgroundColor: isHC ? '#000' : '#F8FAFC',
+                            border: isHC ? '2px solid #FFFF00' : 'none',
+                            padding: '18px',
+                            borderRadius: '24px',
+                        }}
+                    >
+                        <div style={{ fontSize: '11px', color: 'var(--text-sub)', fontWeight: 800 }}>Distance</div>
+                        <div
+                            style={{
+                                fontSize: '24px',
+                                fontWeight: 900,
+                                color: isHC ? '#FFFF00' : 'var(--gn-deepblue)',
+                            }}
+                        >
+                            {selectedPlace.distance}
+                        </div>
+                    </div>
+                </div>
+
+                {/* 🚌 실시간 저상버스 정보 섹션 */}
+                <div
+                    style={{
+                        marginTop: '20px',
+                        padding: '20px',
+                        backgroundColor: isHC ? '#000' : '#EBF5FF',
+                        borderRadius: '24px',
+                        border: isHC ? '3px solid #FFFF00' : '1px solid #BFDBFE',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'space-between',
+                    }}
+                >
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+                        <div
+                            style={{
+                                fontSize: '24px',
+                                backgroundColor: isHC ? '#FFFF00' : '#003366',
+                                padding: '10px',
+                                borderRadius: '12px',
+                                color: isHC ? '#000' : '#FFF',
+                            }}
+                        >
+                            🚌
+                        </div>
+                        <div>
+                            <div style={{ fontSize: '12px', fontWeight: 800, color: 'var(--text-sub)' }}>
+                                가장 빠른 버스
+                            </div>
+                            <div style={{ fontSize: '18px', fontWeight: 900, color: 'var(--text-main)' }}>
+                                {selectedPlace.busInfo.line}{' '}
+                                <span style={{ fontSize: '13px', color: isHC ? '#FFFF00' : '#003366' }}>
+                                    [{selectedPlace.busInfo.type}]
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                        <div style={{ fontSize: '18px', fontWeight: 900, color: isHC ? '#FFFF00' : '#FF3B30' }}>
+                            {selectedPlace.busInfo.arrivalTime}
+                        </div>
+                        <div style={{ fontSize: '11px', fontWeight: 700, color: 'var(--gn-success)' }}>
+                            혼잡도: {selectedPlace.busInfo.status}
+                        </div>
+                    </div>
+                </div>
+
+                {/* 게이지 바 */}
+                <div
+                    style={{
+                        marginTop: '25px',
+                        padding: '20px',
+                        backgroundColor: isHC ? '#000' : '#F8FAFC',
+                        borderRadius: '24px',
+                        border: borderStyle,
+                    }}
+                >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '10px' }}>
+                        <span style={{ fontSize: '14px', fontWeight: 800, color: 'var(--text-main)' }}>
+                            휠체어 접근 편리성
+                        </span>
+                        <span style={{ fontSize: '14px', fontWeight: 900, color: isHC ? '#FFFF00' : '#22C55E' }}>
+                            92%
+                        </span>
+                    </div>
+                    <div
+                        style={{
+                            width: '100%',
+                            height: '12px',
+                            backgroundColor: isHC ? '#333' : '#E2E8F0',
+                            borderRadius: '10px',
+                            overflow: 'hidden',
+                            border: borderStyle,
+                        }}
+                    >
+                        <div
+                            style={{
+                                width: isSheetOpen ? '92%' : '0%',
+                                height: '100%',
+                                background: isHC ? '#FFFF00' : 'linear-gradient(90deg, #22C55E, #003366)',
+                                transition: 'width 1.5s ease-out',
+                            }}
+                        />
+                    </div>
+                </div>
+
+                <div style={{ display: 'flex', gap: '16px', marginTop: '30px' }}>
+                    <button
+                        style={{
+                            flex: 1,
+                            height: '64px',
+                            borderRadius: '22px',
+                            border: borderStyle,
+                            backgroundColor: isHC ? '#000' : '#F1F5F9',
+                            color: isHC ? '#FFFF00' : '#003366',
+                            fontWeight: 900,
+                        }}
+                    >
+                        상세 정보
+                    </button>
+                    <button
+                        onClick={() => setSheetOpen(false)}
+                        style={{
+                            flex: 2,
+                            height: '64px',
+                            borderRadius: '22px',
+                            border: borderStyle,
+                            backgroundColor: 'var(--gn-deepblue)',
+                            color: selectedTextColor,
+                            fontWeight: 900,
+                        }}
+                    >
+                        닫기
+                    </button>
+                </div>
+            </div>
         </div>
     );
 };
