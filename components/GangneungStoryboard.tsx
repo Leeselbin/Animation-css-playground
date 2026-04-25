@@ -67,7 +67,7 @@ const GangneungPremiumTour = () => {
                 onClick={() => setSheetOpen(false)}
             />
 
-            {/* 📱 헤더: 버튼 내부 글자색 강제 지정 */}
+            {/* 📱 헤더:  버튼 내부 글자색 강제 지정 */}
             <header
                 style={{
                     position: 'absolute',
