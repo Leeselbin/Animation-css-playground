@@ -135,7 +135,7 @@ const GangneungStoryboard = () => {
             {/* 헤더 */}
             <header style={styles.header}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                    <div style={{ fontSize: '24px' }}>🌊</div>
+                    <div style={{ fontSize: '25px' }}>🌊</div>
                     <h2 style={{ fontSize: '19px', fontWeight: '900', letterSpacing: '-0.5px', margin: 0 }}>
                         G-Barrier Free
                     </h2>
