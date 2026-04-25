@@ -10,7 +10,7 @@ export default function Navigation() {
     return (
         <nav className={styles.nav}>
             <ul className={styles.list}>
-                <li>
+                {/* <li>
                     <Link href={'/button'}>Button{path === '/button' ? '🔥' : ''}</Link>
                 </li>
                 <li>
@@ -18,9 +18,9 @@ export default function Navigation() {
                 </li>
                 <li>
                     <Link href={'/calendar'}>Calendar{path === '/calendar' ? '🔥' : ''}</Link>
-                </li>
+                </li> */}
                 <li>
-                    <Link href={'/figmaPractice'}>Calendar{path === '/figmaPractice' ? '🔥' : ''}</Link>
+                    <Link href={'/figmaPractice'}>FigmaPractice{path === '/figmaPractice' ? '🔥' : ''}</Link>
                 </li>
             </ul>
         </nav>

@@ -1,6 +1,4 @@
 {
   "/page": "app/page.js",
-  "/button/page": "app/button/page.js",
-  "/carousel/page": "app/carousel/page.js",
-  "/calendar/page": "app/calendar/page.js"
+  "/figmaPractice/page": "app/figmaPractice/page.js"
 }

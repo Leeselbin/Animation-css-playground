@@ -16,20 +16,15 @@
       "static/chunks/main-app.js",
       "static/chunks/app/not-found.js"
     ],
-    "/button/page": [
+    "/figmaPractice/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/button/page.js"
+      "static/chunks/app/figmaPractice/page.js"
     ],
-    "/carousel/page": [
+    "/_not-found/page": [
       "static/chunks/webpack.js",
       "static/chunks/main-app.js",
-      "static/chunks/app/carousel/page.js"
-    ],
-    "/calendar/page": [
-      "static/chunks/webpack.js",
-      "static/chunks/main-app.js",
-      "static/chunks/app/calendar/page.js"
+      "static/chunks/app/_not-found/page.js"
     ]
   }
 }
