@@ -26,7 +26,7 @@ const THEMES = {
 };
 
 const GangneungPremiumTour = () => {
-    const [isSheetOpen, setSheetOpen] = useState(false);
+    const [isSheetOpen, setSheetOpen] = useState(true);
     const [theme, setTheme] = useState<'light' | 'highContrast'>('highContrast');
 
     const currentThemeStyles = THEMES[theme] as React.CSSProperties;
