@@ -1,23 +1,24 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, CSSProperties } from 'react';
 
 const GangneungStoryboard = () => {
     const [isSheetOpen, setSheetOpen] = useState(false);
 
-    const styles = {
+    // CSSProperties 타입을 명시하여 TS 에러를 방지하고 객체를 분리해 가독성을 높입니다.
+    const styles: { [key: string]: CSSProperties } = {
         container: {
             position: 'relative',
-            width: '100%',
-            height: '850px',
+            width: '100vw', // % 대신 vw를 사용해 가로 씹힘 방지
+            height: '100vh', // 850px 대신 vh를 사용해 전체 화면 대응
             backgroundColor: '#E5E9F0',
             overflow: 'hidden',
             fontFamily: '"Pretendard Variable", Pretendard, -apple-system, sans-serif',
         },
-        // 1. 상단 내비게이션 (더 세련된 그라데이션)
         header: {
             position: 'absolute',
             top: 0,
+            left: 0,
             width: '100%',
             height: '70px',
             background: 'linear-gradient(90deg, #003366 0%, #00509d 100%)',
@@ -28,8 +29,8 @@ const GangneungStoryboard = () => {
             color: 'white',
             boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
             zIndex: 100,
+            boxSizing: 'border-box', // 패딩이 너비를 넘지 않게 고정
         },
-        // 2. 플로팅 필터 그룹 (유리 질감 추가)
         filterContainer: {
             position: 'absolute',
             top: '90px',
@@ -54,7 +55,6 @@ const GangneungStoryboard = () => {
             boxShadow: '0 8px 16px rgba(0,0,0,0.08)',
             cursor: 'pointer',
         },
-        // 3. 커스텀 핀 마커 (애니메이션 효과용)
         marker: {
             position: 'absolute',
             top: '45%',
@@ -76,10 +76,9 @@ const GangneungStoryboard = () => {
             boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
             marginBottom: '4px',
         },
-        // 4. 바텀 시트 (프리미엄 카드 스타일)
         bottomSheet: {
             position: 'absolute',
-            bottom: isSheetOpen ? '20px' : '-100%',
+            bottom: isSheetOpen ? '20px' : '-120%', // 밖으로 완전히 숨기기 위해 조정
             left: '20px',
             right: '20px',
             backgroundColor: 'white',
@@ -120,13 +119,14 @@ const GangneungStoryboard = () => {
 
     return (
         <div style={styles.container}>
-            {/* 고품질 지도 배경 (실제 지도 느낌을 위해 이미지 레이어 추가) */}
+            {/* 지도 배경 */}
             <div
                 style={{
                     width: '100%',
                     height: '100%',
-                    backgroundImage: `url('https://api.mapbox.com/styles/v1/mapbox/light-v10/static/128.91,37.79,13,0/1000x850?access_token=YOUR_MAPBOX_TOKEN')`,
+                    backgroundImage: `url('https://api.mapbox.com/styles/v1/mapbox/light-v10/static/128.91,37.79,13,0/1000x1000?access_token=YOUR_MAPBOX_TOKEN')`,
                     backgroundSize: 'cover',
+                    backgroundPosition: 'center',
                     opacity: 0.8,
                 }}
                 onClick={() => setSheetOpen(false)}
@@ -207,7 +207,7 @@ const GangneungStoryboard = () => {
             </div>
 
             {/* 프리미엄 바텀 시트 */}
-            <div style={styles.bottomSheet}>
+            <div style={styles.bottomSheet} onClick={(e) => e.stopPropagation()}>
                 <div
                     style={{
                         width: '40px',
@@ -264,7 +264,9 @@ const GangneungStoryboard = () => {
                     </div>
                 </div>
 
-                <button style={styles.ctaButton}>🚌 저상버스 및 이동지원센터 호출</button>
+                <button style={styles.ctaButton} onClick={() => alert('이동지원센터로 연결합니다.')}>
+                    🚌 저상버스 및 이동지원센터 호출
+                </button>
             </div>
         </div>
     );
